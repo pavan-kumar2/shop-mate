@@ -46,17 +46,21 @@ export const ProductProvider = ({ children }) => {
           ?.toLowerCase()
           .includes(searchQuery.toLowerCase());
 
-        // const matchesCategory = product?.category === ""; // Example additional
+        const matchesCategory =
+          category === "all" || category === "" // Support "all" or empty
+            ? true
+            : product?.category === category;
 
-        // if (matchesCategory) {
-        //   return matchesSearchQuery && matchesCategory;
-        // } else {
-        // }
-
-        return matchesSearchQuery;
+        return matchesSearchQuery && matchesCategory;
       })
     );
-  }, [searchQuery, productState.products, cartState.cart, location.pathname]);
+  }, [
+    searchQuery,
+    category,
+    productState.products,
+    cartState.cart,
+    location.pathname,
+  ]);
 
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cartState.cart));
@@ -71,6 +75,7 @@ export const ProductProvider = ({ children }) => {
         searchQuery,
         cartDispatch,
         setSearchQuery,
+        setCategory,
         productId,
       }}
     >

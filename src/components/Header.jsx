@@ -87,8 +87,26 @@ export default function Header() {
               <div className="absolute -bottom-[35px] left-0 w-full bg-white z-50">
                 <ul>
                   {/* <li className="p-1">All Select</li> */}
-                  <li className="p-1" onClick={() => setCategory("jewelary")}>
+                  <li
+                    className="p-1"
+                    onClick={() => setCategory("men's clothing")}
+                  >
+                    men's clothing
+                  </li>
+                  <li className="p-1" onClick={() => setCategory("jewelery")}>
                     jewelery
+                  </li>{" "}
+                  <li
+                    className="p-1"
+                    onClick={() => setCategory("electronics")}
+                  >
+                    electronics
+                  </li>
+                  <li
+                    className="p-1"
+                    onClick={() => setCategory("women's clothing")}
+                  >
+                    women's clothing
                   </li>
                 </ul>
               </div>
