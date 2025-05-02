@@ -70,7 +70,7 @@ export default function ProductDetailPage() {
             <img
               src={updateProductDetail.image}
               alt={updateProductDetail.title}
-              className="w-full max-w-md h-[calc(100dvh-140px)] min-h-[400px] object-contain rounded-xl shadow-[0px_2px_8px_0px_#63636333] p-4"
+              className="w-full max-w-md h-[calc(100vh-300px)] sm:h-[calc(100vh-140px)] min-h-[400px] object-contain rounded-xl shadow-[0px_2px_8px_0px_#63636333] p-4"
             />
           </div>
           <div>
