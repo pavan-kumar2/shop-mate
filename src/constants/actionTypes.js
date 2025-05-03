@@ -11,3 +11,9 @@ export const CATEGORY_ACTIONS = {
 }
 
 export const ALL_CATEGORY = "all category";
+
+export const PRODUCT_DETAIL_ACTIONS = {
+    PRODUCT_LOADING: "PRODUCT_LOADING",
+    PRODUCT_SUCCESS: "PRODUCT_SUCCESS",
+    PRODUCT_FAILED: "PRODUCT_FAILED"
+}

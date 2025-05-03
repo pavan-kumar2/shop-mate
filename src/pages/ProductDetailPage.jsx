@@ -9,7 +9,7 @@ import {
 import { fetchProductDetail } from "../service/api";
 import SpinLoader from "../components/SpinLoader";
 import images from "../utils/images";
-import { CART_ACTIONS } from "../constants/actionTypes";
+import { CART_ACTIONS, PRODUCT_DETAIL_ACTIONS } from "../constants/actionTypes";
 
 export default function ProductDetailPage() {
   const { cartState, cartDispatch, productId } = useContext(ProductContext);
@@ -24,19 +24,19 @@ export default function ProductDetailPage() {
   const { product, isLoading, error } = productDetailState;
 
   useEffect(() => {
-    productDetailDispatch({ type: "PRODUCT_LOADING" });
+    productDetailDispatch({ type: PRODUCT_DETAIL_ACTIONS.PRODUCT_LOADING });
 
     axios;
     fetchProductDetail(productId)
       .then((response) => {
         productDetailDispatch({
-          type: "PRODUCT_SUCCESS",
+          type: PRODUCT_DETAIL_ACTIONS.PRODUCT_SUCCESS,
           payload: response.data,
         });
       })
       .catch((error) =>
         productDetailDispatch({
-          type: "PRODUCT_FAILED",
+          type: PRODUCT_DETAIL_ACTIONS.PRODUCT_FAILED,
           payload: error.message,
         })
       );
