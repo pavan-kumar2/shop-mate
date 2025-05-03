@@ -9,10 +9,10 @@ const initialCart = getInitialCart();
 
 export const cartInitialState = {
     cart: initialCart,
-    subTotalPrice: initialCart.reduce(
+    subTotalPrice: Number(initialCart.reduce(
         (acc, product) => acc + (product.totalPrice || product.price * (product.quantity || 1)),
         0
-    ),
+    ).toFixed(2))
 }
 
 
