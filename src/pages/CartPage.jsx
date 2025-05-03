@@ -2,14 +2,17 @@ import React, { useContext, useEffect } from "react";
 import Cart from "../components/Cart";
 import { ProductContext } from "../context/productContext";
 import images from "../utils/images";
+import { ALL_CATEGORY } from "../constants/actionTypes";
 
 const CartPage = () => {
-  const { filteredProducts, cartState } = useContext(ProductContext);
+  const { filteredProducts, cartState, setCategory } =
+    useContext(ProductContext);
 
   const { cart } = cartState;
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
+    setCategory(ALL_CATEGORY);
   }, []);
 
   return (
