@@ -90,7 +90,7 @@ export default function Header() {
             productId ? "absolute w-max right-4" : ""
           }`}
         >
-          {!productId && filteredProducts.length && (
+          {!productId && (filteredProducts.length || cart.length) && (
             <div className="relative w-full lg:w-[240px]">
               <div className="flex justify-center items-center bg-white rounded-lg h-[38px] relative">
                 <img
