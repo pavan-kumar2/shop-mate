@@ -27,7 +27,6 @@ export const ProductProvider = ({ children }) => {
     categoryListInitialState
   );
   const [filteredProducts, setFilteredProducts] = useState([]);
-  const [searchQuery, setSearchQuery] = useState("");
   const [searchState, setSearchState] = useState({
     query: "",
     placeholder: "Search in Products",
@@ -92,7 +91,7 @@ export const ProductProvider = ({ children }) => {
       productBasedOnPage().filter((product) => {
         const matchesSearchQuery = product?.title
           ?.toLowerCase()
-          .includes(searchQuery.toLowerCase());
+          .includes(searchState?.query?.toLowerCase());
 
         const matchesCategory =
           category == ALL_CATEGORY // Support all category
@@ -103,7 +102,7 @@ export const ProductProvider = ({ children }) => {
       })
     );
   }, [
-    searchQuery,
+    searchState.query,
     category,
     productState.products,
     cartState.cart,
@@ -120,11 +119,11 @@ export const ProductProvider = ({ children }) => {
         productState,
         cartState,
         filteredProducts,
-        searchQuery,
+        searchState,
         categoryListState,
         category,
         cartDispatch,
-        setSearchQuery,
+        setSearchState,
         setCategory,
         productId,
       }}

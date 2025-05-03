@@ -6,13 +6,14 @@ import { ALL_CATEGORY } from "../constants/actionTypes";
 
 export default function Header() {
   const {
-    searchQuery,
-    setSearchQuery,
+    searchState,
+    setSearchState,
     setCategory,
     cartState,
     productId,
     categoryListState,
     category,
+    filteredProducts,
   } = useContext(ProductContext);
 
   const { cart } = cartState;
@@ -85,7 +86,7 @@ export default function Header() {
         </div>
 
         <div className="flex gap-5 lg:w-auto w-full">
-          {!productId && (
+          {!productId && filteredProducts.length && (
             <div className="relative w-full lg:w-[240px]">
               <div className="flex justify-center items-center bg-white rounded-lg h-[38px] relative">
                 <img
@@ -96,18 +97,21 @@ export default function Header() {
                 <input
                   className="pl-7 py-1 pr-2 rounded-lg w-full h-full text-sm font-medium"
                   type="search"
-                  placeholder={`Search ${
-                    location.pathname.replace("/", "") || "product"
-                  }`}
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder={searchState.placeholder}
+                  value={searchState.query}
+                  onChange={(e) =>
+                    setSearchState((prev) => ({
+                      ...prev,
+                      query: e.target.value,
+                    }))
+                  }
                   onFocus={() => setIsCategoriesVisible(true)}
                   onBlur={() =>
                     setTimeout(() => setIsCategoriesVisible(false), 300)
                   }
                 />
               </div>
-              {categories.length && isCategoriesVisible && (
+              {isCategoriesVisible && (
                 <div className="absolute group-focus-within:block w-full z-5">
                   <ul className=" bg-white shadow-md mt-0.5 rounded-md overflow-hidden">
                     {categories.map((item, index) => (

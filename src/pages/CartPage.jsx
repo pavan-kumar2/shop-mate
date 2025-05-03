@@ -5,7 +5,7 @@ import images from "../utils/images";
 import { ALL_CATEGORY } from "../constants/actionTypes";
 
 const CartPage = () => {
-  const { filteredProducts, cartState, setCategory, setSearchQuery } =
+  const { filteredProducts, cartState, setCategory, setSearchState } =
     useContext(ProductContext);
 
   const { cart } = cartState;
@@ -13,7 +13,7 @@ const CartPage = () => {
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
     setCategory(ALL_CATEGORY);
-    setSearchQuery("");
+    setSearchState((prev) => ({ ...prev, query: "" }));
   }, []);
 
   return (

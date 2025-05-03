@@ -7,14 +7,14 @@ import HeroBanner from "../components/HeroBanner";
 import { ALL_CATEGORY } from "../constants/actionTypes";
 
 const HomePage = () => {
-  const { productState, filteredProducts, setSearchQuery, setCategory } =
+  const { productState, filteredProducts, setSearchState, setCategory } =
     useContext(ProductContext);
   const { isLoading, error } = productState;
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
     setCategory(ALL_CATEGORY);
-    setSearchQuery("");
+    setSearchState((prev) => ({ ...prev, query: "" }));
   }, []);
 
   return (
