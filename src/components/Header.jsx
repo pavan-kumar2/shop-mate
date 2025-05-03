@@ -1,13 +1,21 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { ProductContext } from "../context/productContext";
 import images from "../utils/images";
 
 export default function Header() {
-  const { searchQuery, setSearchQuery, setCategory, cartState, productId } =
-    useContext(ProductContext);
+  const {
+    searchQuery,
+    setSearchQuery,
+    setCategory,
+    cartState,
+    productId,
+    categoryListState,
+    category,
+  } = useContext(ProductContext);
 
   const { cart } = cartState;
+  const { categories } = categoryListState;
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -16,6 +24,10 @@ export default function Header() {
     setIsMobileMenuOpen(newState);
     document.body.style.overflow = newState ? "hidden" : "auto";
   };
+
+  useEffect(() => {
+    setCategory("all category");
+  }, []);
 
   return (
     <header className="bg-white sticky top-0 z-10">
@@ -68,57 +80,51 @@ export default function Header() {
             )}
           </NavLink>
         </div>
+
         <div className="flex gap-5 lg:w-auto w-full">
           {!productId && (
-            <div className="flex justify-center items-center bg-white rounded-lg relative lg:w-[240px] w-full h-[38px]">
-              <img
-                className="absolute left-1.5 top-1/2 -translate-y-1/2 w-[17px]"
-                src={images.searchIcon}
-                alt="search icon"
-              />
-
-              <input
-                className="pl-7 py-1 pr-2 rounded-lg w-full h-full text-sm font-medium"
-                type="search"
-                placeholder="Search Products"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-              />
-              <div className="absolute -bottom-[35px] left-0 w-full bg-white z-50">
-                <ul>
-                  {/* <li className="p-1">All Select</li> */}
-                  <li
-                    className="p-1"
-                    onClick={() => setCategory("men's clothing")}
-                  >
-                    men's clothing
-                  </li>
-                  <li className="p-1" onClick={() => setCategory("jewelery")}>
-                    jewelery
-                  </li>{" "}
-                  <li
-                    className="p-1"
-                    onClick={() => setCategory("electronics")}
-                  >
-                    electronics
-                  </li>
-                  <li
-                    className="p-1"
-                    onClick={() => setCategory("women's clothing")}
-                  >
-                    women's clothing
-                  </li>
-                </ul>
+            <div className="relative group w-full lg:w-[240px]">
+              <div className="flex justify-center items-center bg-white rounded-lg h-[38px] relative">
+                <img
+                  className="absolute left-1.5 top-1/2 -translate-y-1/2 w-[17px]"
+                  src={images.searchIcon}
+                  alt="search icon"
+                />
+                <input
+                  className="pl-7 py-1 pr-2 rounded-lg w-full h-full text-sm font-medium"
+                  type="search"
+                  placeholder="Search Products"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                />
               </div>
+              {categories.length && (
+                <div className="absolute hidden group-hover:block group-focus-within:block w-full z-5">
+                  <ul className=" bg-white shadow-md mt-0.5 rounded-md overflow-hidden">
+                    {categories.map((item, index) => (
+                      <li
+                        key={"category-" + index}
+                        className={`py-1.5 px-3 cursor-pointer  text-sm ${
+                          item.value === category
+                            ? "bg-neutral-800 text-white"
+                            : "hover:bg-gray-100"
+                        }`}
+                        onClick={() => setCategory(item.value)}
+                      >
+                        {item.label}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
             </div>
           )}
-
           <button
             onClick={() => toggleHamburgerMenu()}
             type="button"
             className="lg:hidden text-white ml-auto"
           >
-            <img className="w-6" src={images.hamburgerIcon} />
+            <img className="w-7" src={images.hamburgerIcon} />
           </button>
         </div>
       </nav>

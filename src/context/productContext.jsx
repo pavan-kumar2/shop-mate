@@ -1,8 +1,13 @@
 import { createContext, use, useEffect, useReducer, useState } from "react";
 import { ProductInitialState, productReducer } from "../reducer/productReducer";
-import { fetchProducts } from "../service/api";
+import { fetchCategoryList, fetchProducts } from "../service/api";
 import { useLocation } from "react-router-dom";
 import { cartInitialState, cartReducer } from "../reducer/cartReducer";
+import {
+  categoryListInitialState,
+  categoryListReducer,
+} from "../reducer/categoryListReducer";
+import { CATEGORY_ACTIONS } from "../constants/actionTypes";
 
 export const ProductContext = createContext();
 
@@ -13,6 +18,10 @@ export const ProductProvider = ({ children }) => {
     ProductInitialState
   );
   const [cartState, cartDispatch] = useReducer(cartReducer, cartInitialState);
+  const [categoryListState, categoryListDispatch] = useReducer(
+    categoryListReducer,
+    categoryListInitialState
+  );
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [category, setCategory] = useState("");
@@ -26,6 +35,21 @@ export const ProductProvider = ({ children }) => {
       })
       .catch((error) =>
         productDispatch({ type: "FETCH_ERROR", payload: error.message })
+      );
+
+    categoryListDispatch({ type: CATEGORY_ACTIONS.CATEGORY_LIST_LOADING });
+    fetchCategoryList
+      .then((response) => {
+        categoryListDispatch({
+          type: CATEGORY_ACTIONS.CATEGORY_LIST_SUCCESS,
+          payload: response.data,
+        });
+      })
+      .catch((error) =>
+        categoryListDispatch({
+          type: CATEGORY_ACTIONS.CATEGORY_LIST_FAILED,
+          payload: error.message,
+        })
       );
   }, []);
 
@@ -47,7 +71,7 @@ export const ProductProvider = ({ children }) => {
           .includes(searchQuery.toLowerCase());
 
         const matchesCategory =
-          category === "all" || category === "" // Support "all" or empty
+          category === "all category" // Support all category
             ? true
             : product?.category === category;
 
@@ -73,6 +97,8 @@ export const ProductProvider = ({ children }) => {
         cartState,
         filteredProducts,
         searchQuery,
+        categoryListState,
+        category,
         cartDispatch,
         setSearchQuery,
         setCategory,
