@@ -51,7 +51,7 @@ export default function HeroBanner() {
         {heroBanner.map((banner, i) => (
           <SwiperSlide key={i} className="rounded-b-xl overflow-hidden">
             <img
-              className="h-[300px] w-full object-fill"
+              className=" w-full object-fill"
               src={banner}
               alt={"banner-image" + i}
             />
