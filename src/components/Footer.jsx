@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import images from "../utils/images";
 import { ProductContext } from "../context/productContext";
@@ -8,6 +8,10 @@ export default function Footer() {
     useContext(ProductContext);
 
   const { categories } = categoryListState;
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [category]);
 
   return (
     <footer className="bg-gray-900 text-white px-5 py-10">
@@ -54,12 +58,14 @@ export default function Footer() {
             <h3 className="text-lg font-semibold mb-4">Shop</h3>
             <ul className="space-y-2 text-sm text-gray-400">
               {categories.map((item, index) => (
-                <li
-                  className="hover:text-white cursor-pointer"
-                  key={"footer-category-" + index}
-                  onClick={() => setCategory(item.value)}
-                >
-                  {item.label}
+                <li key={"footer-category-" + index}>
+                  <Link
+                    to={"/"}
+                    className="hover:text-white cursor-pointer"
+                    onClick={() => setCategory(item.value)}
+                  >
+                    {item.label}
+                  </Link>
                 </li>
               ))}
             </ul>
