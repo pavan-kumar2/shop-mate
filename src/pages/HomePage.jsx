@@ -4,13 +4,17 @@ import { ProductContext } from "../context/productContext";
 import SpinLoader from "../components/SpinLoader";
 import images from "../utils/images";
 import HeroBanner from "../components/HeroBanner";
+import { ALL_CATEGORY } from "../constants/actionTypes";
 
 const HomePage = () => {
-  const { productState, filteredProducts } = useContext(ProductContext);
+  const { productState, filteredProducts, setSearchQuery, setCategory } =
+    useContext(ProductContext);
   const { isLoading, error } = productState;
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
+    setCategory(ALL_CATEGORY);
+    setSearchQuery("");
   }, []);
 
   return (

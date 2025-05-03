@@ -28,6 +28,10 @@ export const ProductProvider = ({ children }) => {
   );
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
+  const [searchState, setSearchState] = useState({
+    query: "",
+    placeholder: "Search in Products",
+  });
   const [category, setCategory] = useState("");
   const productId = location.state?.productId;
 
@@ -64,18 +68,28 @@ export const ProductProvider = ({ children }) => {
   }, []);
 
   useEffect(() => {
+    const productBasedOnPage = () => {
+      if (location.pathname === "/cart") {
+        setSearchState((prev) => ({ ...prev, placeholder: "Search in Cart" }));
+        return cartState.cart;
+      } else {
+        setSearchState((prev) => ({
+          ...prev,
+          placeholder: "Search in Products",
+        }));
+        return productState.products.map((product) => {
+          const existingProduct = cartState.cart.find(
+            (cartItem) => cartItem.id === product.id
+          );
+          return existingProduct
+            ? { ...product, quantity: existingProduct.quantity }
+            : product;
+        });
+      }
+    };
+
     setFilteredProducts(
-      (location.pathname === "/cart"
-        ? cartState.cart
-        : productState.products.map((product) => {
-            const existingProduct = cartState.cart.find(
-              (cartItem) => cartItem.id === product.id
-            );
-            return existingProduct
-              ? { ...product, quantity: existingProduct.quantity }
-              : product;
-          })
-      ).filter((product) => {
+      productBasedOnPage().filter((product) => {
         const matchesSearchQuery = product?.title
           ?.toLowerCase()
           .includes(searchQuery.toLowerCase());
