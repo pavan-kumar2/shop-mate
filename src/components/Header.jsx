@@ -34,9 +34,9 @@ export default function Header() {
   }, []);
 
   return (
-    <header className="bg-white sticky top-0 z-10">
+    <header className="bg-black sticky top-0 z-10">
       <nav
-        className="mx-auto bg-black flex lg:flex-row flex-col gap-3 items-center justify-between p-4 lg:px-5 relative"
+        className="max-w-7xl mx-auto flex lg:flex-row flex-col gap-3 items-center justify-between p-4 relative"
         aria-label="Global"
       >
         <Link to={"/"} className="lg:p-1.5 p-0 text-white text-2xl font-bold">
@@ -85,7 +85,11 @@ export default function Header() {
           </NavLink>
         </div>
 
-        <div className="flex gap-5 lg:w-auto w-full">
+        <div
+          className={`flex gap-5 lg:w-auto w-full ${
+            productId ? "absolute w-max right-4" : ""
+          }`}
+        >
           {!productId && filteredProducts.length && (
             <div className="relative w-full lg:w-[240px]">
               <div className="flex justify-center items-center bg-white rounded-lg h-[38px] relative">
@@ -137,7 +141,7 @@ export default function Header() {
             type="button"
             className="lg:hidden text-white ml-auto"
           >
-            <img className="w-7" src={images.hamburgerIcon} />
+            <img className="w-[25px] min-w-[25px]" src={images.hamburgerIcon} />
           </button>
         </div>
       </nav>

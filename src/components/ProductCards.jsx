@@ -14,7 +14,7 @@ export default function ProductCards() {
           key={product.id}
           to={`/product/${encodeURIComponent(product.title)}`}
           state={{ productId: product.id }}
-          className="group relative border-1 rounded-r-2xl border-[#00000036] p-3 flex flex-col h-max"
+          className="group relative border-1 rounded-2xl border-[#00000036] p-3 flex flex-col h-max"
         >
           <img
             src={product.image}
