@@ -7,7 +7,11 @@ import {
   categoryListInitialState,
   categoryListReducer,
 } from "../reducer/categoryListReducer";
-import { ALL_CATEGORY, CATEGORY_ACTIONS } from "../constants/actionTypes";
+import {
+  ALL_CATEGORY,
+  CATEGORY_ACTIONS,
+  PRODUCTS_ACTIONS,
+} from "../constants/actionTypes";
 
 export const ProductContext = createContext();
 
@@ -28,13 +32,19 @@ export const ProductProvider = ({ children }) => {
   const productId = location.state?.productId;
 
   useEffect(() => {
-    productDispatch({ type: "FETCH_START" });
+    productDispatch({ type: PRODUCTS_ACTIONS.FETCH_START });
     fetchProducts
       .then((response) => {
-        productDispatch({ type: "FETCH_SUCCESS", payload: response.data });
+        productDispatch({
+          type: PRODUCTS_ACTIONS.FETCH_SUCCESS,
+          payload: response.data,
+        });
       })
       .catch((error) =>
-        productDispatch({ type: "FETCH_ERROR", payload: error.message })
+        productDispatch({
+          type: PRODUCTS_ACTIONS.FETCH_ERROR,
+          payload: error.message,
+        })
       );
 
     categoryListDispatch({ type: CATEGORY_ACTIONS.CATEGORY_LIST_LOADING });

@@ -1,3 +1,5 @@
+import { PRODUCTS_ACTIONS } from "../constants/actionTypes";
+
 export const ProductInitialState = {
     products: [],
     isLoading: false,
@@ -6,19 +8,19 @@ export const ProductInitialState = {
 
 export const productReducer = (currentState, action) => {
     switch (action.type) {
-        case 'FETCH_START':
+        case PRODUCTS_ACTIONS.FETCH_START:
             return {
                 ...currentState,
                 isLoading: true,
                 error: null
             }
-        case 'FETCH_SUCCESS':
+        case PRODUCTS_ACTIONS.FETCH_SUCCESS:
             return {
                 ...currentState,
                 isLoading: false,
                 products: action.payload
             }
-        case 'FETCH_ERROR':
+        case PRODUCTS_ACTIONS.FETCH_ERROR:
             return {
                 ...currentState,
                 isLoading: false,
