@@ -1,6 +1,5 @@
-import axios from "axios";
 import React, { useContext, useEffect, useReducer, useState } from "react";
-import { Link, useLocation, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { ProductContext } from "../context/productContext";
 import {
   productDetailInitialState,
@@ -26,8 +25,6 @@ export default function ProductDetailPage() {
 
   useEffect(() => {
     productDetailDispatch({ type: PRODUCT_DETAIL_ACTIONS.PRODUCT_LOADING });
-
-    axios;
     fetchProductDetail(productId)
       .then((response) => {
         productDetailDispatch({
@@ -43,7 +40,7 @@ export default function ProductDetailPage() {
       );
 
     window.scrollTo({ top: 0, behavior: "smooth" });
-  }, []);
+  }, [productId]);
 
   useEffect(() => {
     if (product) {
