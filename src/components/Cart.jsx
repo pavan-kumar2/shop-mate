@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { ProductContext } from "../context/productContext";
 import { Link } from "react-router-dom";
+import { CART_ACTIONS } from "../constants/actionTypes";
 
 export default function Cart() {
   const { cartDispatch, filteredProducts, cartState } =
@@ -75,7 +76,7 @@ export default function Cart() {
                           }`}
                           onClick={() =>
                             cartDispatch({
-                              type: "MANAGE_QUANTITY",
+                              type: CART_ACTIONS.MANAGE_QUANTITY,
                               payload: {
                                 productId: product.id,
                                 actionState: "decrement",
@@ -94,7 +95,7 @@ export default function Cart() {
                           }`}
                           onClick={() =>
                             cartDispatch({
-                              type: "MANAGE_QUANTITY",
+                              type: CART_ACTIONS.MANAGE_QUANTITY,
                               payload: {
                                 productId: product.id,
                                 actionState: "increment",
@@ -112,7 +113,7 @@ export default function Cart() {
                           className="font-medium text-amber-500 hover:text-amber-400 cursor-pointer"
                           onClick={() =>
                             cartDispatch({
-                              type: "REMOVE_FROM_CART",
+                              type: CART_ACTIONS.REMOVE_FROM_CART,
                               productId: product.id,
                             })
                           }

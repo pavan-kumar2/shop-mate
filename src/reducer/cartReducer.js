@@ -1,3 +1,5 @@
+import { CART_ACTIONS } from "../constants/actionTypes";
+
 const getInitialCart = () => {
     const storedCart = localStorage.getItem("cart");
     return storedCart ? JSON.parse(storedCart) : [];
@@ -17,7 +19,7 @@ export const cartInitialState = {
 export const cartReducer = (currentState, action) => {
 
     switch (action.type) {
-        case 'ADD_TO_CART':
+        case CART_ACTIONS.ADD_TO_CART:
             const existingProduct = currentState.cart.find(product => product?.id === action.newProduct?.id) ?? false;
 
             if (existingProduct) {
@@ -43,7 +45,7 @@ export const cartReducer = (currentState, action) => {
                 return { cart: updateCart, subTotalPrice: Number(updateSubTotalPrice.toFixed(2)) };
             }
 
-        case 'MANAGE_QUANTITY':
+        case CART_ACTIONS.MANAGE_QUANTITY:
             {
                 const updateCart = currentState.cart.map(product => {
                     if (product?.id === action.payload?.productId) {
@@ -62,7 +64,7 @@ export const cartReducer = (currentState, action) => {
 
                 return { cart: updateCart, subTotalPrice: Number(updateSubTotalPrice.toFixed(2)) };
             }
-        case 'REMOVE_FROM_CART':
+        case CART_ACTIONS.REMOVE_FROM_CART:
             {
                 const updateCart = currentState.cart.filter(product => product?.id !== action.productId);
                 const updateSubTotalPrice = updateCart.reduce((acc, product) => acc + product.totalPrice, 0);

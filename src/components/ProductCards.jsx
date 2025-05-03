@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { ProductContext } from "../context/productContext";
 import { Link } from "react-router-dom";
+import { CART_ACTIONS } from "../constants/actionTypes";
 
 export default function ProductCards() {
   const { filteredProducts, productState, cartDispatch } =
@@ -39,7 +40,10 @@ export default function ProductCards() {
             onClick={(e) => {
               e.stopPropagation();
               e.preventDefault();
-              cartDispatch({ type: "ADD_TO_CART", newProduct: product });
+              cartDispatch({
+                type: CART_ACTIONS.ADD_TO_CART,
+                newProduct: product,
+              });
             }}
           >
             Add to Cart

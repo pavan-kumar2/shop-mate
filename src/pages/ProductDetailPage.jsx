@@ -9,6 +9,7 @@ import {
 import { fetchProductDetail } from "../service/api";
 import SpinLoader from "../components/SpinLoader";
 import images from "../utils/images";
+import { CART_ACTIONS } from "../constants/actionTypes";
 
 export default function ProductDetailPage() {
   const { cartState, cartDispatch, productId } = useContext(ProductContext);
@@ -106,7 +107,10 @@ export default function ProductDetailPage() {
                     : ""
                 }`}
                 onClick={(e) =>
-                  cartDispatch({ type: "ADD_TO_CART", newProduct: product })
+                  cartDispatch({
+                    type: CART_ACTIONS.ADD_TO_CART,
+                    newProduct: product,
+                  })
                 }
               >
                 Add to Cart
