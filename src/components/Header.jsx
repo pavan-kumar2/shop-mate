@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { ProductContext } from "../context/productContext";
 import images from "../utils/images";
+import { ALL_CATEGORY } from "../constants/actionTypes";
 
 export default function Header() {
   const {
@@ -26,7 +27,7 @@ export default function Header() {
   };
 
   useEffect(() => {
-    setCategory("all category");
+    setCategory(ALL_CATEGORY);
   }, []);
 
   return (

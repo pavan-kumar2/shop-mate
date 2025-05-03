@@ -1,4 +1,4 @@
-import { CATEGORY_ACTIONS } from "../constants/actionTypes";
+import { ALL_CATEGORY, CATEGORY_ACTIONS } from "../constants/actionTypes";
 
 export const categoryListInitialState = {
     categories: [],
@@ -20,7 +20,7 @@ export const categoryListReducer = (currentState, action) => {
             return { ...currentState, isLoading: true, error: null }
 
         case CATEGORY_ACTIONS.CATEGORY_LIST_SUCCESS:
-            const modifiedCategories = ['all category', ...action.payload]
+            const modifiedCategories = [ALL_CATEGORY, ...action.payload]
             const updatedCategories = modifiedCategories.map(category => ({ value: category, label: toTitleCase(category) }))
             return { ...currentState, isLoading: false, categories: updatedCategories }
 

@@ -7,7 +7,7 @@ import {
   categoryListInitialState,
   categoryListReducer,
 } from "../reducer/categoryListReducer";
-import { CATEGORY_ACTIONS } from "../constants/actionTypes";
+import { ALL_CATEGORY, CATEGORY_ACTIONS } from "../constants/actionTypes";
 
 export const ProductContext = createContext();
 
@@ -71,7 +71,7 @@ export const ProductProvider = ({ children }) => {
           .includes(searchQuery.toLowerCase());
 
         const matchesCategory =
-          category === "all category" // Support all category
+          category == ALL_CATEGORY // Support all category
             ? true
             : product?.category === category;
 
