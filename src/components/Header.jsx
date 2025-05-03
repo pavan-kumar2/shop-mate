@@ -96,7 +96,9 @@ export default function Header() {
                 <input
                   className="pl-7 py-1 pr-2 rounded-lg w-full h-full text-sm font-medium"
                   type="search"
-                  placeholder="Search Products"
+                  placeholder={`Search ${
+                    location.pathname.replace("/", "") || "product"
+                  }`}
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   onFocus={() => setIsCategoriesVisible(true)}
