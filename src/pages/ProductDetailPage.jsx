@@ -10,6 +10,7 @@ import { fetchProductDetail } from "../service/api";
 import SpinLoader from "../components/SpinLoader";
 import images from "../utils/images";
 import { CART_ACTIONS, PRODUCT_DETAIL_ACTIONS } from "../constants/actionTypes";
+import Ratings from "../components/Ratings";
 
 export default function ProductDetailPage() {
   const { cartState, cartDispatch, productId } = useContext(ProductContext);
@@ -86,7 +87,10 @@ export default function ProductDetailPage() {
             </p>
 
             <div className="flex items-center gap-2 mb-4">
-              <span className="text-yellow-500 text-lg">★</span>
+              <Ratings
+                ratings={updateProductDetail.rating?.rate}
+                size={"22px"}
+              ></Ratings>
               <span className="text-gray-800 font-medium">
                 {updateProductDetail.rating?.rate}
               </span>

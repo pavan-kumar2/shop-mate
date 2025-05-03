@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { ProductContext } from "../context/productContext";
 import { Link } from "react-router-dom";
 import { CART_ACTIONS } from "../constants/actionTypes";
+import Ratings from "./Ratings";
 
 export default function ProductCards() {
   const { filteredProducts, productState, cartDispatch } =
@@ -26,9 +27,16 @@ export default function ProductCards() {
               {product.title}
             </h3>
 
-            <small className="text-body-secondary text-gray-500">
-              Rating <b>{product.rating.rate}</b> ({product.rating.count})
-            </small>
+            <div className="flex items-center gap-2 mb-2">
+              <Ratings ratings={product.rating.rate}></Ratings>
+
+              <span className="text-gray-800 font-medium">
+                {product.rating?.rate}
+              </span>
+              <span className="text-gray-500 text-sm">
+                ({product.rating?.count} reviews)
+              </span>
+            </div>
             <p className="text-[18px] font-medium text-[#007e4b]">
               ${product.price}
             </p>
