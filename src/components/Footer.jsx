@@ -1,8 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import images from "../utils/images";
+import { ProductContext } from "../context/productContext";
 
 export default function Footer() {
+  const { setCategory, categoryListState, category } =
+    useContext(ProductContext);
+
+  const { categories } = categoryListState;
+
   return (
     <footer className="bg-gray-900 text-white px-5 py-10">
       <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -43,31 +49,22 @@ export default function Footer() {
           </ul>
         </div>
 
-        <div>
-          <h3 className="text-lg font-semibold mb-4">Shop</h3>
-          <ul className="space-y-2 text-sm text-gray-400">
-            <li>
-              <a href="#" className="hover:text-white">
-                Men
-              </a>
-            </li>
-            <li>
-              <a href="#" className="hover:text-white">
-                Women
-              </a>
-            </li>
-            <li>
-              <a href="#" className="hover:text-white">
-                Electronics
-              </a>
-            </li>
-            <li>
-              <a href="#" className="hover:text-white">
-                Accessories
-              </a>
-            </li>
-          </ul>
-        </div>
+        {categories.length && (
+          <div>
+            <h3 className="text-lg font-semibold mb-4">Shop</h3>
+            <ul className="space-y-2 text-sm text-gray-400">
+              {categories.map((item, index) => (
+                <li
+                  className="hover:text-white cursor-pointer"
+                  key={"footer-category-" + index}
+                  onClick={() => setCategory(item.value)}
+                >
+                  {item.label}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
 
         <div>
           <h3 className="text-lg font-semibold mb-4">Follow Us</h3>
