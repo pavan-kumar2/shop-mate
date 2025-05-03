@@ -20,6 +20,8 @@ export default function Header() {
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
+  const [isCategoriesVisible, setIsCategoriesVisible] = useState(false);
+
   const toggleHamburgerMenu = () => {
     const newState = !isMobileMenuOpen;
     setIsMobileMenuOpen(newState);
@@ -84,7 +86,7 @@ export default function Header() {
 
         <div className="flex gap-5 lg:w-auto w-full">
           {!productId && (
-            <div className="relative group w-full lg:w-[240px]">
+            <div className="relative w-full lg:w-[240px]">
               <div className="flex justify-center items-center bg-white rounded-lg h-[38px] relative">
                 <img
                   className="absolute left-1.5 top-1/2 -translate-y-1/2 w-[17px]"
@@ -97,10 +99,14 @@ export default function Header() {
                   placeholder="Search Products"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
+                  onFocus={() => setIsCategoriesVisible(true)}
+                  onBlur={() =>
+                    setTimeout(() => setIsCategoriesVisible(false), 300)
+                  }
                 />
               </div>
-              {categories.length && (
-                <div className="absolute hidden group-hover:block group-focus-within:block w-full z-5">
+              {categories.length && isCategoriesVisible && (
+                <div className="absolute group-focus-within:block w-full z-5">
                   <ul className=" bg-white shadow-md mt-0.5 rounded-md overflow-hidden">
                     {categories.map((item, index) => (
                       <li
