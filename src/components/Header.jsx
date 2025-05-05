@@ -3,6 +3,7 @@ import { Link, NavLink } from "react-router-dom";
 import { ProductContext } from "../context/productContext";
 import images from "../utils/images";
 import { ALL_CATEGORY } from "../constants/actionTypes";
+import { useInputBind } from "../hooks/useInputBind";
 
 export default function Header() {
   const {
@@ -21,6 +22,8 @@ export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const [isCategoriesVisible, setIsCategoriesVisible] = useState(false);
+
+  const [bindSearch] = useInputBind(searchState, setSearchState);
 
   const toggleHamburgerMenu = () => {
     const newState = !isMobileMenuOpen;
@@ -102,12 +105,7 @@ export default function Header() {
                   type="search"
                   placeholder={searchState.placeholder}
                   value={searchState.query}
-                  onChange={(e) =>
-                    setSearchState((prev) => ({
-                      ...prev,
-                      query: e.target.value,
-                    }))
-                  }
+                  {...bindSearch}
                   onFocus={() => setIsCategoriesVisible(true)}
                   onBlur={() =>
                     setTimeout(() => setIsCategoriesVisible(false), 300)
