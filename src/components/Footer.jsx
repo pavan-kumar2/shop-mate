@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import images from "../utils/images";
 import { ProductContext } from "../context/productContext";
+import { useScrollToTop } from "../hooks/useScrollToTop";
 
 export default function Footer() {
   const { setCategory, categoryListState, category } =
@@ -9,9 +10,7 @@ export default function Footer() {
 
   const { categories } = categoryListState;
 
-  useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }, [category]);
+  useScrollToTop(category);
 
   return (
     <footer className="bg-gray-900 text-white px-5 py-10">

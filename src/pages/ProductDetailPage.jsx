@@ -10,6 +10,7 @@ import SpinLoader from "../components/SpinLoader";
 import images from "../utils/images";
 import { CART_ACTIONS, PRODUCT_DETAIL_ACTIONS } from "../constants/actionTypes";
 import Ratings from "../components/Ratings";
+import { useScrollToTop } from "../hooks/useScrollToTop";
 
 export default function ProductDetailPage() {
   const { cartState, cartDispatch, productId } = useContext(ProductContext);
@@ -22,6 +23,8 @@ export default function ProductDetailPage() {
     productDetailInitialState
   );
   const { product, isLoading, error } = productDetailState;
+
+  useScrollToTop(updateProductDetail);
 
   useEffect(() => {
     productDetailDispatch({ type: PRODUCT_DETAIL_ACTIONS.PRODUCT_LOADING });
@@ -38,8 +41,6 @@ export default function ProductDetailPage() {
           payload: error.message,
         })
       );
-
-    window.scrollTo({ top: 0, behavior: "smooth" });
   }, [productId]);
 
   useEffect(() => {

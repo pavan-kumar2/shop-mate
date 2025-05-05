@@ -3,6 +3,7 @@ import Cart from "../components/Cart";
 import { ProductContext } from "../context/productContext";
 import images from "../utils/images";
 import { ALL_CATEGORY } from "../constants/actionTypes";
+import { useScrollToTop } from "../hooks/useScrollToTop";
 
 const CartPage = () => {
   const { filteredProducts, cartState, setCategory, setSearchState } =
@@ -10,8 +11,9 @@ const CartPage = () => {
 
   const { cart } = cartState;
 
+  useScrollToTop();
+
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
     setCategory(ALL_CATEGORY);
     setSearchState((prev) => ({ ...prev, query: "" }));
   }, []);
