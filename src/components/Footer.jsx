@@ -52,7 +52,7 @@ export default function Footer() {
           </ul>
         </div>
 
-        {categories.length && (
+        {categories.length > 0 && (
           <div>
             <h3 className="text-lg font-semibold mb-4">Shop</h3>
             <ul className="space-y-2 text-sm text-gray-400">
