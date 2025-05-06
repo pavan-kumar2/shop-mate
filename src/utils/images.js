@@ -16,7 +16,9 @@ import facebookLogo from '../assets/facebook-logo.svg';
 import instagramLogo from '../assets/instagram-logo.svg';
 import linkedinLogo from '../assets/linkedin-logo.svg';
 import xTwitterLogo from '../assets/x-twitter-logo.svg';
-
+import amazon_pay from '../assets/AmazonPay.png';
+import google_pay from "../assets/GooglePay.png";
+import paypal from "../assets/Paypal.png";
 
 const images = {
     noCartProducts,
@@ -36,7 +38,10 @@ const images = {
     facebookLogo,
     instagramLogo,
     linkedinLogo,
-    xTwitterLogo
+    xTwitterLogo,
+    amazon_pay,
+    google_pay,
+    paypal
 };
 
 export default images;
