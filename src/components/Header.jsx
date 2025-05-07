@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import { ProductContext } from "../context/productContext";
 import images from "../utils/images";
 import { ALL_CATEGORY } from "../constants/actionTypes";
@@ -22,6 +22,8 @@ export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const [isCategoriesVisible, setIsCategoriesVisible] = useState(false);
+
+  const location = useLocation();
 
   const [bindSearch] = useInputBind(searchState, setSearchState);
 
@@ -92,7 +94,7 @@ export default function Header() {
             productId ? "absolute w-max right-4" : ""
           }`}
         >
-          {!productId && (
+          {!productId && location.pathname !== "/checkout" && (
             <div className="relative w-full lg:w-[240px]">
               <div className="flex justify-center items-center bg-white rounded-lg h-[38px] relative">
                 <img
