@@ -24,7 +24,7 @@ export default function ProductDetailPage() {
   );
   const { product, isLoading, error } = productDetailState;
 
-  useScrollToTop(updateProductDetail);
+  useScrollToTop();
 
   useEffect(() => {
     productDetailDispatch({ type: PRODUCT_DETAIL_ACTIONS.PRODUCT_LOADING });
