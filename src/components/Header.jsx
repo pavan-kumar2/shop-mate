@@ -4,6 +4,7 @@ import { ProductContext } from "../context/productContext";
 import images from "../utils/images";
 import { ALL_CATEGORY } from "../constants/actionTypes";
 import { useInputBind } from "../hooks/useInputBind";
+import { useSearchBarVisible } from "../hooks/useSearchBarVisible";
 
 export default function Header() {
   const {
@@ -26,6 +27,8 @@ export default function Header() {
   const location = useLocation();
 
   const [bindSearch] = useInputBind(searchState, setSearchState);
+
+  const searchBarVisible = useSearchBarVisible();
 
   const toggleHamburgerMenu = () => {
     const newState = !isMobileMenuOpen;
@@ -91,10 +94,10 @@ export default function Header() {
 
         <div
           className={`flex gap-5 lg:w-auto w-full ${
-            productId ? "absolute w-max right-4" : ""
+            !searchBarVisible ? "absolute w-max right-4" : ""
           }`}
         >
-          {!productId && location.pathname !== "/checkout" && (
+          {searchBarVisible && (
             <div className="relative w-full lg:w-[240px]">
               <div className="flex justify-center items-center bg-white rounded-lg h-[38px] relative">
                 <img
