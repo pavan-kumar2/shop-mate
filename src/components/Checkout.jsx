@@ -172,6 +172,7 @@ export default function Checkout() {
               {[images.amazon_pay, images.google_pay, images.paypal].map(
                 (platform, i) => (
                   <img
+                    key={"payment" + i}
                     onClick={() => setPaymentPlatform(i)}
                     className={`w-[90px] cursor-pointer p-1 object-contain ${
                       i === paymentPlatform
