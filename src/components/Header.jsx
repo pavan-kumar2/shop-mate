@@ -12,7 +12,6 @@ export default function Header() {
     setSearchState,
     setCategory,
     cartState,
-    productId,
     categoryListState,
     category,
   } = useContext(ProductContext);
@@ -24,14 +23,13 @@ export default function Header() {
 
   const [isCategoriesVisible, setIsCategoriesVisible] = useState(false);
 
-  const location = useLocation();
-
   const [bindSearch] = useInputBind(searchState, setSearchState);
 
   const searchBarVisible = useSearchBarVisible();
 
   const toggleHamburgerMenu = () => {
     const newState = !isMobileMenuOpen;
+
     setIsMobileMenuOpen(newState);
     document.body.style.overflow = newState ? "hidden" : "auto";
   };
