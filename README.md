@@ -1,6 +1,6 @@
 # ShopMate – E-commerce Web App
 
-**ShopMate** is a fully functional and visually appealing e-commerce web application built with **React**, **Tailwind CSS**, **React Router v6**, and **Context API**. The project uses <a href="https://fakestoreapi.com/" target="_blank">FakeStoreAPI</a> for products and cart data.
+**ShopMate** is a fully functional and visually appealing e-commerce web application built with **React**, **Tailwind CSS**, **React Router v6**, and **Context API**. The project uses [FakeStoreAPI](https://fakestoreapi.com/) for products and cart data.
 
 ---
 
