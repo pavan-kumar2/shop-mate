@@ -1,4 +1,11 @@
-import { createContext, use, useEffect, useReducer, useState } from "react";
+import {
+  createContext,
+  useCallback,
+  useEffect,
+  useMemo,
+  useReducer,
+  useState,
+} from "react";
 import { ProductInitialState, productReducer } from "../reducer/productReducer";
 import { fetchCategoryList, fetchProducts } from "../service/api";
 import { useLocation } from "react-router-dom";
@@ -26,7 +33,7 @@ export const ProductProvider = ({ children }) => {
     categoryListReducer,
     categoryListInitialState
   );
-  const [filteredProducts, setFilteredProducts] = useState([]);
+
   const [searchState, setSearchState] = useState({
     query: "",
     placeholder: "Search in Products",
@@ -67,51 +74,44 @@ export const ProductProvider = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    const productBasedOnPage = () => {
-      if (location.pathname === "/cart") {
-        setSearchState((prev) => ({ ...prev, placeholder: "Search in Cart" }));
-        return cartState.cart;
-      } else {
-        setSearchState((prev) => ({
-          ...prev,
-          placeholder: "Search in Products",
-        }));
-        return productState.products.map((product) => {
-          const existingProduct = cartState.cart.find(
-            (cartItem) => cartItem.id === product.id
-          );
-          return existingProduct
-            ? { ...product, quantity: existingProduct.quantity }
-            : product;
-        });
-      }
-    };
-
-    setFilteredProducts(
-      productBasedOnPage().filter((product) => {
-        const matchesSearchQuery = product?.title
-          ?.toLowerCase()
-          .includes(searchState?.query?.toLowerCase());
-
-        const matchesCategory =
-          category == ALL_CATEGORY // Support all category
-            ? true
-            : product?.category === category;
-
-        return matchesSearchQuery && matchesCategory;
-      })
-    );
-  }, [
-    searchState.query,
-    category,
-    productState.products,
-    cartState.cart,
-    location.pathname,
-  ]);
+    setSearchState((prev) => ({
+      ...prev,
+      placeholder:
+        location.pathname === "/cart" ? "Search in Cart" : "Search in Products",
+    }));
+  }, [location.pathname]);
 
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cartState.cart));
   }, [cartState.cart]);
+
+  const productBasedOnPage = useCallback(() => {
+    if (location.pathname === "/cart") {
+      return cartState.cart;
+    } else {
+      return productState.products.map((product) => {
+        const existingProduct = cartState.cart.find(
+          (cartItem) => cartItem.id === product.id
+        );
+        return existingProduct
+          ? { ...product, quantity: existingProduct.quantity }
+          : product;
+      });
+    }
+  }, [location.pathname, productState.products, cartState.cart]);
+
+  const filteredProducts = useMemo(() => {
+    return productBasedOnPage().filter((product) => {
+      const matchesSearchQuery = product?.title
+        ?.toLowerCase()
+        .includes(searchState?.query?.toLowerCase());
+
+      const matchesCategory =
+        category === ALL_CATEGORY ? true : product?.category === category;
+
+      return matchesSearchQuery && matchesCategory;
+    });
+  }, [productBasedOnPage, searchState.query, category]);
 
   return (
     <ProductContext.Provider
