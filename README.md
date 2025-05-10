@@ -6,7 +6,7 @@
 
 ## Live Demo
 
-> (Add your deployment link here after hosting)
+https://pavan-kumar-shopmate.netlify.app
 
 ---
 
@@ -36,18 +36,6 @@
 | useReducer     | Local reducer-based state      |
 | FakeStoreAPI   | Mock data for products/cart    |
 | Vite           | Fast development/build tool    |
-
----
-
-## Custom Hooks
-
-Custom hooks are used to encapsulate reusable logic throughout the app:
-
-- **`useInputBind`** – A custom hook for handling input form value and `onChange` binding.
-- **`useScrollToTop`** – Scrolls the page to the top on route change.
-- **`useSearchBarVisible`** – Controls visibility of the search bar based on scroll behavior.
-
-These hooks help keep components clean, reusable, and focused on UI logic.
 
 ---
 
