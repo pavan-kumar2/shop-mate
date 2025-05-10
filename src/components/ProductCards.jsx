@@ -1,12 +1,23 @@
-import React, { useContext } from "react";
+import React, { memo, useCallback, useContext } from "react";
 import { ProductContext } from "../context/productContext";
 import { Link } from "react-router-dom";
 import { CART_ACTIONS } from "../constants/actionTypes";
 import Ratings from "./Ratings";
 
-export default function ProductCards() {
-  const { filteredProducts, productState, cartDispatch } =
-    useContext(ProductContext);
+const ProductCards = () => {
+  const { filteredProducts, cartDispatch } = useContext(ProductContext);
+
+  const handleAddToCart = useCallback(
+    (product) => (e) => {
+      e.stopPropagation();
+      e.preventDefault();
+      cartDispatch({
+        type: CART_ACTIONS.ADD_TO_CART,
+        newProduct: product,
+      });
+    },
+    [cartDispatch]
+  );
 
   return (
     <div className="grid grid-cols-1 gap-x-6 gap-y-5  sm:gap-y-6 sm:grid-cols-2 lg:grid-cols-4 w-full">
@@ -45,14 +56,7 @@ export default function ProductCards() {
             className={`bg-black text-white text-[16px] p-2 rounded-sm mt-auto cursor-pointer transition-all ease-in-out duration-100 active:[transform:scale(0.98)] flex items-center justify-center gap-2 ${
               product.quantity === 10 ? "pointer-events-none opacity-50" : ""
             }`}
-            onClick={(e) => {
-              e.stopPropagation();
-              e.preventDefault();
-              cartDispatch({
-                type: CART_ACTIONS.ADD_TO_CART,
-                newProduct: product,
-              });
-            }}
+            onClick={() => handleAddToCart(product)}
           >
             Add to Cart
             {product.quantity && (
@@ -65,4 +69,6 @@ export default function ProductCards() {
       ))}
     </div>
   );
-}
+};
+
+export default memo(ProductCards);

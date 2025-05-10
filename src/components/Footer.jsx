@@ -1,16 +1,21 @@
-import React, { useContext, useEffect } from "react";
+import React, { memo, useCallback, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import images from "../utils/images";
 import { ProductContext } from "../context/productContext";
 import { useScrollToTop } from "../hooks/useScrollToTop";
 
-export default function Footer() {
+const Footer = () => {
   const { setCategory, categoryListState, category } =
     useContext(ProductContext);
 
   const { categories } = categoryListState;
 
   useScrollToTop(category);
+
+  const handleSetCategory = useCallback(
+    (categoryName) => () => setCategory(categoryName),
+    [setCategory]
+  );
 
   return (
     <footer className="bg-gray-900 text-white px-5 py-10">
@@ -61,7 +66,7 @@ export default function Footer() {
                   <Link
                     to={"/"}
                     className="hover:text-white cursor-pointer"
-                    onClick={() => setCategory(item.value)}
+                    onClick={handleSetCategory(item.value)}
                   >
                     {item.label}
                   </Link>
@@ -111,4 +116,6 @@ export default function Footer() {
       </div>
     </footer>
   );
-}
+};
+
+export default memo(Footer);

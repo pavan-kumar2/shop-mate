@@ -1,4 +1,10 @@
-import React, { useContext, useEffect, useReducer, useState } from "react";
+import React, {
+  useCallback,
+  useContext,
+  useEffect,
+  useReducer,
+  useState,
+} from "react";
 import { Link } from "react-router-dom";
 import { ProductContext } from "../context/productContext";
 import {
@@ -54,6 +60,13 @@ export default function ProductDetailPage() {
     }
   }, [product, cart]);
 
+  const handleAddToCart = useCallback(() => {
+    cartDispatch({
+      type: CART_ACTIONS.ADD_TO_CART,
+      newProduct: product,
+    });
+  }, [cartDispatch, product]);
+
   return (
     <div className="max-w-6xl mx-auto px-4 py-12 min-h-[calc(100dvh-100px)] flex">
       {isLoading && <SpinLoader></SpinLoader>}
@@ -108,12 +121,7 @@ export default function ProductDetailPage() {
                     ? "pointer-events-none opacity-50"
                     : ""
                 }`}
-                onClick={(e) =>
-                  cartDispatch({
-                    type: CART_ACTIONS.ADD_TO_CART,
-                    newProduct: product,
-                  })
-                }
+                onClick={handleAddToCart}
               >
                 Add to Cart
                 {updateProductDetail?.quantity && (

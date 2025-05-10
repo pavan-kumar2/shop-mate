@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import images from "../utils/images";
@@ -41,7 +41,7 @@ const MOBILE_BANNER = [
   },
 ];
 
-export default function HeroBanner() {
+const HeroBanner = () => {
   const [heroBanner, setHeroBanner] = useState(DESKTOP_BANNER);
 
   useEffect(() => {
@@ -91,4 +91,6 @@ export default function HeroBanner() {
       </Swiper>
     </div>
   );
-}
+};
+
+export default memo(HeroBanner);

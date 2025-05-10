@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { memo, useContext, useEffect } from "react";
 import ProductCards from "../components/ProductCards";
 import { ProductContext } from "../context/productContext";
 import SpinLoader from "../components/SpinLoader";
@@ -25,15 +25,15 @@ const HomePage = () => {
 
       {isLoading ? (
         <SpinLoader></SpinLoader>
-      ) : !isLoading && filteredProducts.length ? (
+      ) : !isLoading && filteredProducts?.length > 0 ? (
         <ProductCards></ProductCards>
-      ) : !isLoading && !filteredProducts.length && !error ? (
+      ) : !isLoading && filteredProducts?.length === 0 && !error ? (
         <img
           src={images.noSearchResultFound}
           alt="search result not found"
           className="max-w-[375px] m-auto"
         />
-      ) : !isLoading && !filteredProducts.length && error ? (
+      ) : !isLoading && filteredProducts?.length === 0 && error ? (
         <div className="max-w-[375px] text-center m-auto">
           <img src={images.notFound} alt="not found" className="w-full" />
           <p className="text-lg mt-1">Not found. Please try again!</p>
@@ -42,4 +42,4 @@ const HomePage = () => {
     </div>
   );
 };
-export default HomePage;
+export default memo(HomePage);

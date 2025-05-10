@@ -1,7 +1,7 @@
-import React from "react";
+import React, { memo } from "react";
 import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
 
-export default function Ratings({ ratings, size = "16px" }) {
+const Ratings = ({ ratings, size = "16px" }) => {
   const stars = [];
 
   for (let i = 1; i <= 5; i++) {
@@ -16,4 +16,6 @@ export default function Ratings({ ratings, size = "16px" }) {
     }
   }
   return <div className="flex items-center gap-1">{stars}</div>;
-}
+};
+
+export default memo(Ratings);

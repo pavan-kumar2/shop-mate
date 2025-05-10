@@ -1,4 +1,10 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, {
+  memo,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { ProductContext } from "../context/productContext";
 import images from "../utils/images";
@@ -6,7 +12,7 @@ import { ALL_CATEGORY } from "../constants/actionTypes";
 import { useInputBind } from "../hooks/useInputBind";
 import { useSearchBarVisible } from "../hooks/useSearchBarVisible";
 
-export default function Header() {
+const Header = () => {
   const {
     searchState,
     setSearchState,
@@ -37,6 +43,11 @@ export default function Header() {
   useEffect(() => {
     setCategory(ALL_CATEGORY);
   }, []);
+
+  const handleSetCategory = useCallback(
+    (category) => () => setCategory(category),
+    [setCategory]
+  );
 
   return (
     <header className="bg-black sticky top-0 z-10">
@@ -126,7 +137,7 @@ export default function Header() {
                             ? "bg-neutral-800 text-white"
                             : "hover:bg-gray-100"
                         }`}
-                        onClick={() => setCategory(item.value)}
+                        onClick={handleSetCategory(item.value)}
                       >
                         {item.label}
                       </li>
@@ -230,4 +241,6 @@ export default function Header() {
       )}
     </header>
   );
-}
+};
+
+export default memo(Header);

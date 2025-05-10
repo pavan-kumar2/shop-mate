@@ -19,16 +19,16 @@ const CartPage = () => {
   }, []);
 
   return (
-    <div className="mx-auto max-w-2xl px-3 py-3 sm:px-4 sm:py-4 lg:max-w-7xl min-h-[calc(100dvh-76px))] flex flex-col">
-      {cart.length && filteredProducts.length ? (
+    <div className="mx-auto max-w-2xl px-3 py-3 sm:px-4 sm:py-4 lg:max-w-7xl min-h-[calc(100dvh-76px)] flex flex-col">
+      {cart.length > 0 && filteredProducts.length > 0 ? (
         <Cart></Cart>
-      ) : !cart.length ? (
+      ) : cart.length === 0 ? (
         <img
           className="max-w-[375px] m-auto"
           src={images.noCartProducts}
           alt="cart items not found"
         />
-      ) : !filteredProducts.length ? (
+      ) : filteredProducts.length === 0 ? (
         <img
           className="max-w-[375px] m-auto"
           src={images.noSearchResultFound}
