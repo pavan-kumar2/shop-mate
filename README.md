@@ -1,12 +1,52 @@
-# React + Vite
+# 🛍️ ShopMate – E-commerce Web App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**ShopMate** is a fully functional and visually appealing e-commerce web application built with **React**, **Tailwind CSS**, **React Router v6**, and **Context API**. The project uses [FakeStoreAPI](https://fakestoreapi.com/) for products and cart data.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Live Demo
 
-## Expanding the ESLint configuration
+> (Add your deployment link here after hosting)
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## ⚙️ Features
+
+- 🔎 Browse products by category
+- 🧺 Add/Remove products from the cart
+- 🧾 Order summary and checkout
+- 🏷️ Real-time cart subtotal and quantity management
+- 📝 Shipping address form
+- 💾 Cart and form data saved in LocalStorage
+- 🎯 Responsive and modern UI with Tailwind CSS
+- 💳 Select payment method (mocked)
+
+---
+
+## 🛠️ Tech Stack
+
+| Tech         | Purpose                       |
+|--------------|-------------------------------|
+| React        | Front-end UI                  |
+| React Router | Client-side routing           |
+| Tailwind CSS | Styling and layout            |
+| Context API  | Global state management       |
+| FakeStoreAPI | Mock data for products/cart   |
+| Vite         | Fast development server/build |
+
+---
+
+## 📁 Folder Structure
+
+shopmate/
+├── public/
+├── src/
+│ ├── components/ # Reusable UI components
+│ ├── context/ # Context API setup
+│ ├── pages/ # Page components (Home, Cart, Checkout, etc.)
+│ ├── utils/ # Utility files (e.g., image assets)
+│ ├── App.jsx # Root component with routes
+│ └── main.jsx # App entry point
+├── tailwind.config.js
+├── vite.config.js
+└── README.md
