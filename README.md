@@ -38,15 +38,15 @@
 
 ## 📁 Folder Structure
 
-shopmate/
-├── public/
-├── src/
-│ ├── components/ # Reusable UI components
-│ ├── context/ # Context API setup
-│ ├── pages/ # Page components (Home, Cart, Checkout, etc.)
-│ ├── utils/ # Utility files (e.g., image assets)
-│ ├── App.jsx # Root component with routes
-│ └── main.jsx # App entry point
-├── tailwind.config.js
-├── vite.config.js
-└── README.md
+      shopmate/
+      ├── public/
+      ├── src/
+      │ ├── components/ # Reusable UI components
+      │ ├── context/ # Context API setup
+      │ ├── pages/ # Page components (Home, Cart, Checkout, etc.)
+      │ ├── utils/ # Utility files (e.g., image assets)
+      │ ├── App.jsx # Root component with routes
+      │ └── main.jsx # App entry point
+      ├── tailwind.config.js
+      ├── vite.config.js
+      └── README.md
