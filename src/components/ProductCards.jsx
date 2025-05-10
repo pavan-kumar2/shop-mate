@@ -56,7 +56,7 @@ const ProductCards = () => {
             className={`bg-black text-white text-[16px] p-2 rounded-sm mt-auto cursor-pointer transition-all ease-in-out duration-100 active:[transform:scale(0.98)] flex items-center justify-center gap-2 ${
               product.quantity === 10 ? "pointer-events-none opacity-50" : ""
             }`}
-            onClick={() => handleAddToCart(product)}
+            onClick={handleAddToCart(product)}
           >
             Add to Cart
             {product.quantity && (
